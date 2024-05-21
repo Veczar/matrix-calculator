@@ -4,29 +4,40 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
 
-@Getter
 public class Matrix {
-
+    @Getter
     private String name;
-    private int rowsCount;
-    private int colsCount;
-    private double[][] data;
+    private final int rowsCount;
+    private final int colsCount;
+    private final double[][] data;
 
     public double[][] get() {
         return this.data;
     }
-
-    public Matrix(String name, int rowsCount, int colsCount) {
+    
+    // number of rows without the checksum rows
+    public int getRowsCount() {
+        return rowsCount - 1;
+    }
+    
+    // number of cols without the checksum cols
+    public int getColsCount() {
+        return colsCount - 1;
+    }
+    
+    public Matrix(String name, int rowsCnt, int colsCnt) {
         this.name = name;
-        this.rowsCount = rowsCount;
-        this.colsCount = colsCount;
+        // +1 to account for checksums at the last position
+        this.rowsCount = rowsCnt + 1;
+        this.colsCount = colsCnt + 1;
         this.data = new double[rowsCount][colsCount];
     }
 
     public Matrix(GridPane gridPane, String name) {
         this.name = name;
-        this.rowsCount = gridPane.getRowCount();
-        this.colsCount = gridPane.getColumnCount();
+        // +1 to account for checksums at the last position
+        this.rowsCount = gridPane.getRowCount() + 1;
+        this.colsCount = gridPane.getColumnCount() + 1;
         this.data = new double[rowsCount][colsCount];
         extractMatrixValues(gridPane);
     }

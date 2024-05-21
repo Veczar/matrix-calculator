@@ -23,7 +23,7 @@ public class HelloController {
 
         // matrix A
         matrixRows.valueProperty().addListener(
-                (obs, oldVal, newVal) ->  updateMatrixGrid(matrixAGrid, newVal, matrixColumns.getValue())
+                (obs, oldVal, newVal) -> updateMatrixGrid(matrixAGrid, newVal, matrixColumns.getValue())
         );
         matrixColumns.valueProperty().addListener(
                 (obs, oldVal, newVal) -> updateMatrixGrid(matrixAGrid, matrixRows.getValue(), newVal)
@@ -37,7 +37,8 @@ public class HelloController {
                 (obs, oldVal, newVal) -> updateMatrixGrid(matrixBGrid, matrixRows.getValue(), newVal)
         );
     }
-
+    
+    // re-renders grid with new size
     private void updateMatrixGrid(GridPane gridPane, int rows, int columns) {
         gridPane.getChildren().clear();
         for (int row = 0; row < rows; row++) {
@@ -66,6 +67,8 @@ public class HelloController {
         Matrix resultMatrix = Calculator.addMatrices(matrixA, matrixB);
         System.out.println(resultMatrix);
         matrixResultGrid = resultMatrix.getAsGridPane(matrixResultGrid);
+        System.out.println(matrixA);
+        System.out.println(matrixB);
     }
 
 //    private double[][] extractMatrixValues(GridPane gridPane) {
