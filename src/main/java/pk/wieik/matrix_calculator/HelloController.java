@@ -8,23 +8,26 @@ import javafx.scene.layout.GridPane;
 public class HelloController {
 
     @FXML
-    private Spinner<Integer> matrixARows, matrixAColumns, matrixBRows, matrixBColumns;
+    private Spinner<Integer> matrixRows, matrixColumns;
     @FXML
     private GridPane matrixAGrid, matrixBGrid;
 
     @FXML
     private void initialize() {
-        updateMatrixGrid(matrixAGrid, matrixARows.getValue(), matrixAColumns.getValue());
-        updateMatrixGrid(matrixBGrid, matrixBRows.getValue(), matrixBColumns.getValue());
+        updateMatrixGrid(matrixAGrid, matrixRows.getValue(), matrixColumns.getValue());
+        updateMatrixGrid(matrixBGrid, matrixRows.getValue(), matrixColumns.getValue());
 
-        matrixARows.valueProperty().addListener((obs, oldVal, newVal) ->
-                updateMatrixGrid(matrixAGrid, newVal, matrixAColumns.getValue()));
-        matrixAColumns.valueProperty().addListener((obs, oldVal, newVal) ->
-                updateMatrixGrid(matrixAGrid, matrixARows.getValue(), newVal));
-        matrixBRows.valueProperty().addListener((obs, oldVal, newVal) ->
-                updateMatrixGrid(matrixBGrid, newVal, matrixBColumns.getValue()));
-        matrixBColumns.valueProperty().addListener((obs, oldVal, newVal) ->
-                updateMatrixGrid(matrixBGrid, matrixBRows.getValue(), newVal));
+        // matrix A
+        matrixRows.valueProperty().addListener((obs, oldVal, newVal) ->
+                updateMatrixGrid(matrixAGrid, newVal, matrixColumns.getValue()));
+        matrixColumns.valueProperty().addListener((obs, oldVal, newVal) ->
+                updateMatrixGrid(matrixAGrid, matrixRows.getValue(), newVal));
+
+        // matrix B
+        matrixRows.valueProperty().addListener((obs, oldVal, newVal) ->
+                updateMatrixGrid(matrixBGrid, newVal, matrixColumns.getValue()));
+        matrixColumns.valueProperty().addListener((obs, oldVal, newVal) ->
+                updateMatrixGrid(matrixBGrid, matrixRows.getValue(), newVal));
     }
 
     private void updateMatrixGrid(GridPane gridPane, int rows, int columns) {
