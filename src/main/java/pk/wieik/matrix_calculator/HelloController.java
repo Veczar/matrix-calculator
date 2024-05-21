@@ -47,6 +47,16 @@ public class HelloController {
                 textField.setPrefWidth(50);
                 gridPane.add(textField, col, row);
             }
+            TextField rowSumField = new TextField();
+            rowSumField.setPrefWidth(50);
+            rowSumField.setEditable(false);
+            gridPane.add(rowSumField, columns, row);
+        }
+        for (int col = 0; col < columns; col++) {
+            TextField colSumField = new TextField();
+            colSumField.setPrefWidth(50);
+            colSumField.setEditable(false);
+            gridPane.add(colSumField, col, rows);
         }
     }
 
