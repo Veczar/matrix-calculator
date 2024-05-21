@@ -9,8 +9,12 @@ public class HelloController {
 
     @FXML
     private Spinner<Integer> matrixRows, matrixColumns;
+
     @FXML
-    private GridPane matrixAGrid, matrixBGrid;
+    private GridPane matrixAGrid, matrixBGrid, matrixResultGrid;
+
+    private Matrix matrixA;
+    private Matrix matrixB;
 
     @FXML
     private void initialize() {
@@ -18,16 +22,20 @@ public class HelloController {
         updateMatrixGrid(matrixBGrid, matrixRows.getValue(), matrixColumns.getValue());
 
         // matrix A
-        matrixRows.valueProperty().addListener((obs, oldVal, newVal) ->
-                updateMatrixGrid(matrixAGrid, newVal, matrixColumns.getValue()));
-        matrixColumns.valueProperty().addListener((obs, oldVal, newVal) ->
-                updateMatrixGrid(matrixAGrid, matrixRows.getValue(), newVal));
+        matrixRows.valueProperty().addListener(
+                (obs, oldVal, newVal) ->  updateMatrixGrid(matrixAGrid, newVal, matrixColumns.getValue())
+        );
+        matrixColumns.valueProperty().addListener(
+                (obs, oldVal, newVal) -> updateMatrixGrid(matrixAGrid, matrixRows.getValue(), newVal)
+        );
 
         // matrix B
-        matrixRows.valueProperty().addListener((obs, oldVal, newVal) ->
-                updateMatrixGrid(matrixBGrid, newVal, matrixColumns.getValue()));
-        matrixColumns.valueProperty().addListener((obs, oldVal, newVal) ->
-                updateMatrixGrid(matrixBGrid, matrixRows.getValue(), newVal));
+        matrixRows.valueProperty().addListener(
+                (obs, oldVal, newVal) -> updateMatrixGrid(matrixBGrid, newVal, matrixColumns.getValue())
+        );
+        matrixColumns.valueProperty().addListener(
+                (obs, oldVal, newVal) -> updateMatrixGrid(matrixBGrid, matrixRows.getValue(), newVal)
+        );
     }
 
     private void updateMatrixGrid(GridPane gridPane, int rows, int columns) {
@@ -43,41 +51,41 @@ public class HelloController {
 
     @FXML
     private void extractMatrices() {
-        double[][] matrixA = extractMatrixValues(matrixAGrid);
-        double[][] matrixB = extractMatrixValues(matrixBGrid);
+        matrixA = new Matrix(matrixAGrid, "Matrix A");
+        matrixB = new Matrix(matrixBGrid, "Matrix B");
 
-        printMatrix(matrixA, "Matrix A");
-        printMatrix(matrixB, "Matrix B");
+        System.out.println(matrixA);
+        System.out.println(matrixB);
     }
 
-    private double[][] extractMatrixValues(GridPane gridPane) {
-        int rows = gridPane.getRowCount();
-        int columns = gridPane.getColumnCount();
-        double[][] matrix = new double[rows][columns];
+    @FXML
+    private void add() {
+        matrixA = new Matrix(matrixAGrid, "Matrix A");
+        matrixB = new Matrix(matrixBGrid, "Matrix B");
 
-        for (var node : gridPane.getChildren()) {
-            if (node instanceof TextField) {
-                Integer row = GridPane.getRowIndex(node);
-                Integer col = GridPane.getColumnIndex(node);
-
-                if (row != null && col != null) {
-                    TextField textField = (TextField) node;
-                    String text = textField.getText();
-                    matrix[row][col] = text.isEmpty() ? 0 : Double.parseDouble(text);
-                }
-            }
-        }
-
-        return matrix;
+        Matrix resultMatrix = Calculator.addMatrices(matrixA, matrixB);
+        System.out.println(resultMatrix);
+        matrixResultGrid = resultMatrix.getAsGridPane(matrixResultGrid);
     }
 
-    private void printMatrix(double[][] matrix, String matrixName) {
-        System.out.println(matrixName + ":");
-        for (double[] row : matrix) {
-            for (double value : row) {
-                System.out.print(value + " ");
-            }
-            System.out.println();
-        }
-    }
+//    private double[][] extractMatrixValues(GridPane gridPane) {
+//        int rows = gridPane.getRowCount();
+//        int columns = gridPane.getColumnCount();
+//        double[][] matrix = new double[rows][columns];
+//
+//        for (var node : gridPane.getChildren()) {
+//            if (node instanceof TextField) {
+//                Integer row = GridPane.getRowIndex(node);
+//                Integer col = GridPane.getColumnIndex(node);
+//
+//                if (row != null && col != null) {
+//                    TextField textField = (TextField) node;
+//                    String text = textField.getText();
+//                    matrix[row][col] = text.isEmpty() ? 0 : Double.parseDouble(text);
+//                }
+//            }
+//        }
+//
+//        return matrix;
+//    }
 }
