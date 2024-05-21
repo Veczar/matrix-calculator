@@ -1,33 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="pk.wieik.matrix_calculator.HelloController">
-    <TitledPane text="Matrix A Input" expanded="true">
-        <VBox spacing="5.0" >
-            <HBox spacing="5.0">
-                <Label text="Rows:"/>
-                <Spinner fx:id="matrixRows" min="1" max="10" initialValue="4"/>
-                <Label text="Columns:"/>
-                <Spinner fx:id="matrixColumns" min="1" max="10" initialValue="4"/>
-            </HBox>
-            <GridPane fx:id="matrixAGrid" hgap="5" vgap="5"/>
-        </VBox>
+<VBox prefHeight="400.0" prefWidth="700.0" spacing="10.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pk.wieik.matrix_calculator.HelloController">
+    <HBox prefHeight="44.0" prefWidth="700.0" spacing="5.0">
+        <children>
+            <Label text="Rows:">
+                <HBox.margin>
+                    <Insets left="10.0" />
+                </HBox.margin>
+            </Label>
+            <Spinner fx:id="matrixRows" initialValue="4" max="10" min="1">
+                <HBox.margin>
+                    <Insets left="10.0" />
+                </HBox.margin>
+            </Spinner>
+            <Label text="Columns:">
+                <HBox.margin>
+                    <Insets left="10.0" />
+                </HBox.margin>
+            </Label>
+            <Spinner fx:id="matrixColumns" initialValue="4" max="10" min="1">
+                <HBox.margin>
+                    <Insets left="10.0" />
+                </HBox.margin>
+            </Spinner>
+        </children>
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+        <padding>
+            <Insets top="10.0" />
+        </padding>
+    </HBox>
+    <TitledPane expanded="true" text="Matrix Inputs">
+        <HBox spacing="10.0">
+            <children>
+                <VBox HBox.hgrow="ALWAYS" prefHeight="22.0" spacing="5.0" prefWidth="200.0">
+                    <Label text="Matrix A" />
+                    <GridPane fx:id="matrixAGrid" hgap="5" vgap="5" />
+                </VBox>
+                <VBox HBox.hgrow="ALWAYS" spacing="5.0" prefWidth="200.0">
+                    <Label text="Matrix B" />
+                    <GridPane fx:id="matrixBGrid" hgap="5" vgap="5" />
+                </VBox>
+            </children>
+        </HBox>
     </TitledPane>
-    <TitledPane text="Matrix B Input" expanded="true">
-        <VBox spacing="5.0">
-            <HBox spacing="5.0">
-
-            </HBox>
-            <GridPane fx:id="matrixBGrid" hgap="5" vgap="5"/>
-        </VBox>
-    </TitledPane>
-    <Button text="Extract Matrices" onAction="#extractMatrices"/>
+    <HBox prefHeight="23.0" prefWidth="700.0">
+        <children>
+            <Button onAction="#extractMatrices" prefHeight="25.0" prefWidth="134.0" text="Extract Matrices">
+                <HBox.margin>
+                    <Insets left="10.0" />
+                </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="22.0" prefWidth="82.0" text="Button">
+                <HBox.margin>
+                    <Insets left="20.0" />
+                </HBox.margin>
+            </Button>
+        </children>
+    </HBox>
 </VBox>
