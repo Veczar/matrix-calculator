@@ -4,6 +4,6 @@ module pk.wieik.matrixestest {
 
     requires org.controlsfx.controls;
 
-    opens pk.wieik.matrixestest to javafx.fxml;
-    exports pk.wieik.matrixestest;
+    opens pk.wieik.matrix_calculator to javafx.fxml;
+    exports pk.wieik.matrix_calculator;
 }

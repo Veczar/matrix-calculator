@@ -1,4 +1,4 @@
-package pk.wieik.matrixestest;
+package pk.wieik.matrix_calculator;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

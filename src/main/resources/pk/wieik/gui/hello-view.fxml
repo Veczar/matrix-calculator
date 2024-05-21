@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="pk.wieik.matrixestest.HelloController">
+      fx:controller="pk.wieik.matrix_calculator.HelloController">
     <TitledPane text="Matrix A Input" expanded="true">
         <VBox spacing="5.0" >
             <HBox spacing="5.0">

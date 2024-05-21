@@ -1,13 +1,11 @@
-package pk.wieik.matrixestest;
+package pk.wieik.matrix_calculator;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class HelloController {
-
 
     @FXML
     private Spinner<Integer> matrixARows, matrixAColumns, matrixBRows, matrixBColumns;
