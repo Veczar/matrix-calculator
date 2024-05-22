@@ -65,8 +65,10 @@ public class HelloController {
         matrixB = new Matrix(matrixBGrid, "Matrix B");
 
         Matrix resultMatrix = Calculator.addMatrices(matrixA, matrixB);
-        System.out.println(resultMatrix);
+        Calculator.checkCorrectness(matrixA, matrixB, resultMatrix);
         matrixResultGrid = resultMatrix.getAsGridPane(matrixResultGrid);
+        
+        System.out.println(resultMatrix);
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
@@ -77,8 +79,10 @@ public class HelloController {
         matrixB = new Matrix(matrixBGrid, "Matrix B");
         
         Matrix resultMatrix = Calculator.subMatrices(matrixA, matrixB);
-        System.out.println(resultMatrix);
+        Calculator.checkCorrectness(matrixA, matrixB, resultMatrix);
         matrixResultGrid = resultMatrix.getAsGridPane(matrixResultGrid);
+        
+        System.out.println(resultMatrix);
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
