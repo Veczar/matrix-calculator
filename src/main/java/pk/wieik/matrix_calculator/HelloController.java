@@ -1,9 +1,13 @@
 package pk.wieik.matrix_calculator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Line;
 
 public class HelloController {
 
@@ -47,17 +51,33 @@ public class HelloController {
                 textField.setPrefWidth(50);
                 gridPane.add(textField, col, row);
             }
+
             TextField rowSumField = new TextField();
             rowSumField.setPrefWidth(50);
             rowSumField.setEditable(false);
+            GridPane.setMargin(rowSumField, new Insets(0, 0, 0, 10)); // Add margin around each row sum field
             gridPane.add(rowSumField, columns, row);
+
+            Line hLine = new Line(0, 0, 5, 0); // line width adjusted to match TextField width
+            hLine.setStrokeWidth(1);
+            gridPane.add(hLine, columns, row);
+            GridPane.setValignment(hLine, VPos.CENTER);
+
         }
         for (int col = 0; col < columns; col++) {
             TextField colSumField = new TextField();
             colSumField.setPrefWidth(50);
             colSumField.setEditable(false);
+            GridPane.setMargin(colSumField, new Insets(10,0,0,0 ));
             gridPane.add(colSumField, col, rows);
+
+            Line vLine = new Line(0, 0, 0, 5); // Adjust start and end points for better positioning
+            vLine.setStrokeWidth(1);
+            gridPane.add(vLine, col, rows);
+            GridPane.setHalignment(vLine, HPos.CENTER);
+            GridPane.setMargin(vLine, new Insets(0, 0, 30, 0)); // Adjust margin to move the line up
         }
+
     }
 
     @FXML
