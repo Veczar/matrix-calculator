@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -105,7 +106,71 @@ public class HelloController {
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
-    
+
+    @FXML
+    private void clear() {
+        int rowSize = matrixA.getRowsCount();
+        int colSize = matrixA.getColsCount();
+
+        for (int i = 0; i < rowSize + 1; i++) {
+            matrixA.get()[i][colSize] = 0;
+            matrixB.get()[i][colSize] = 0;
+        }
+
+        for (int i = 0; i < colSize + 1; i++) {
+            matrixA.get()[rowSize][i] = 0;
+            matrixB.get()[rowSize][i] = 0;
+        }
+
+        matrixA.fillGridPane(matrixAGrid);
+        matrixB.fillGridPane(matrixBGrid);
+
+        for (var node : matrixAGrid.getChildren()) {
+            if (node instanceof TextField) {
+                int row = GridPane.getRowIndex(node);
+                int col = GridPane.getColumnIndex(node);
+
+                if (row == rowSize) {
+                    ((TextField) node).clear();
+                }
+                if (col == colSize) {
+                    ((TextField) node).clear();
+                }
+            }
+        }
+
+        for (var node : matrixBGrid.getChildren()) {
+            if (node instanceof TextField) {
+                int row = GridPane.getRowIndex(node);
+                int col = GridPane.getColumnIndex(node);
+
+                if (row == rowSize) {
+                    ((TextField) node).clear();
+                }
+                if (col == colSize) {
+                    ((TextField) node).clear();
+                }
+            }
+        }
+
+        System.out.println(matrixA.get()[rowSize][0]);
+        System.out.println(matrixA);
+        System.out.println(matrixB);
+    }
+
+    @FXML
+    private void clearAll() {
+        for (var node : matrixAGrid.getChildren()) {
+            if (node instanceof TextField) {
+                ((TextField) node).clear();
+            }
+        }
+        for (var node : matrixBGrid.getChildren()) {
+            if (node instanceof TextField) {
+                ((TextField) node).clear();
+            }
+        }
+    }
     @FXML
     private void sub() {
         matrixA = new Matrix("Matrix A", matrixAGrid);
