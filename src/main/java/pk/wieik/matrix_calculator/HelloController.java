@@ -47,37 +47,47 @@ public class HelloController {
         gridPane.getChildren().clear();
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                TextField textField = new TextField();
+                addTextField(0,0,gridPane,col,row);
+                /*TextField textField = new TextField();
                 textField.setPrefWidth(50);
-                gridPane.add(textField, col, row);
+                gridPane.add(textField, col, row);*/
             }
 
-            TextField rowSumField = new TextField();
-            rowSumField.setPrefWidth(50);
-            rowSumField.setEditable(false);
-            GridPane.setMargin(rowSumField, new Insets(0, 0, 0, 10)); // Add margin around each row sum field
-            gridPane.add(rowSumField, columns, row);
+            addTextField(0, 10, gridPane, columns, row);
 
-            Line hLine = new Line(0, 0, 5, 0); // line width adjusted to match TextField width
-            hLine.setStrokeWidth(1);
-            gridPane.add(hLine, columns, row);
-            GridPane.setValignment(hLine, VPos.CENTER);
+            addRowLine(gridPane, columns, row);
 
         }
         for (int col = 0; col < columns; col++) {
-            TextField colSumField = new TextField();
-            colSumField.setPrefWidth(50);
-            colSumField.setEditable(false);
-            GridPane.setMargin(colSumField, new Insets(10,0,0,0 ));
-            gridPane.add(colSumField, col, rows);
+            addTextField(10, 0, gridPane, col, rows);
 
-            Line vLine = new Line(0, 0, 0, 5); // Adjust start and end points for better positioning
-            vLine.setStrokeWidth(1);
-            gridPane.add(vLine, col, rows);
-            GridPane.setHalignment(vLine, HPos.CENTER);
-            GridPane.setMargin(vLine, new Insets(0, 0, 30, 0)); // Adjust margin to move the line up
+            addColLine(gridPane, rows, col);
         }
 
+        addTextField(10, 10, gridPane, columns, rows);
+
+    }
+
+    private static void addTextField(int top, int left, GridPane gridPane, int columns, int row) {
+        TextField rowSumField = new TextField();
+        rowSumField.setPrefWidth(50);
+        GridPane.setMargin(rowSumField, new Insets(top, 0, 0, left)); // Add margin around each row sum field
+        gridPane.add(rowSumField, columns, row);
+    }
+
+    private static void addColLine(GridPane gridPane, int rows, int col) {
+        Line vLine = new Line(0, 0, 0, 5); // Adjust start and end points for better positioning
+        vLine.setStrokeWidth(1);
+        gridPane.add(vLine, col, rows);
+        GridPane.setHalignment(vLine, HPos.CENTER);
+        GridPane.setMargin(vLine, new Insets(0, 0, 30, 0)); // Adjust margin to move the line up
+    }
+
+    private static void addRowLine(GridPane gridPane, int columns, int row) {
+        Line hLine = new Line(0, 0, 5, 0); // line width adjusted to match TextField width
+        hLine.setStrokeWidth(1);
+        gridPane.add(hLine, columns, row);
+        GridPane.setValignment(hLine, VPos.CENTER);
     }
 
     @FXML
