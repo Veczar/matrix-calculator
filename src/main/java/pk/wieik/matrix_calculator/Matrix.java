@@ -48,7 +48,8 @@ public class Matrix {
                 Integer row = GridPane.getRowIndex(node);
                 Integer col = GridPane.getColumnIndex(node);
 
-                if (row != null && col != null && row < rowsCount-1 && col < colsCount-1) {
+                if (row != null && col != null) {
+//                    if (row < rowsCount-1 && col < colsCount-1) // disables checksums
                     TextField textField = (TextField) node;
                     String text = textField.getText();
                     data[row][col] = text.isEmpty() ? 0 : Double.parseDouble(text);

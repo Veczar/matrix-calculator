@@ -97,7 +97,7 @@ public class HelloController {
         matrixB = new Matrix("Matrix B", matrixBGrid);
 
         Matrix resultMatrix = Calculator.addMatrices(matrixA, matrixB);
-        Calculator.checkCorrectness(matrixA, matrixB, resultMatrix);
+        Calculator.checkCorrectnessAddition(matrixA, matrixB, resultMatrix);
         
         updateView(resultMatrix);
         
@@ -112,7 +112,7 @@ public class HelloController {
         matrixB = new Matrix("Matrix B", matrixBGrid);
         
         Matrix resultMatrix = Calculator.subMatrices(matrixA, matrixB);
-        Calculator.checkCorrectness(matrixA, matrixB, resultMatrix);
+        Calculator.checkCorrectnessSubtraction(matrixA, matrixB, resultMatrix);
         
         updateView(resultMatrix);
         

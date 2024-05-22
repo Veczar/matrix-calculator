@@ -53,13 +53,14 @@ public class MatrixCalculatorTest {
         expectedResult.get()[2][1] = 20; // 8 + 12
         
         // Grand total
-        expectedResult.get()[2][2] = 36; // 14 + 22 (row sums)
+        expectedResult.get()[2][2] = 72; // 14 + 22 (row sums)
         
         Matrix result = Calculator.addMatrices(matrixA, matrixB);
         System.out.println(matrixA);
         System.out.println(matrixB);
         System.out.println(result);
-        Calculator.checkCorrectness(matrixA, matrixB, result);
+        
+        Calculator.checkCorrectnessAddition(matrixA, matrixB, result);
         assertMatrixEquals(expectedResult, result);
     }
     
@@ -80,9 +81,14 @@ public class MatrixCalculatorTest {
         expectedResult.get()[2][1] = -8; // -4 + -4
         
         // Grand total
-        expectedResult.get()[2][2] = -16; // -8 + -8 (row sums)
+        expectedResult.get()[2][2] = -32; // -8 + -8 (row sums)
         
         Matrix result = Calculator.subMatrices(matrixA, matrixB);
+        System.out.println(matrixA);
+        System.out.println(matrixB);
+        System.out.println(result);
+        
+        Calculator.checkCorrectnessSubtraction(matrixA, matrixB, result);
         assertMatrixEquals(expectedResult, result);
     }
     
