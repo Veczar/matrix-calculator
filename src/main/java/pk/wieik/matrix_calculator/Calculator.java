@@ -29,6 +29,32 @@ public class Calculator {
         return resultMat;
     }
     
+    public static Matrix subMatrices(Matrix matrixA, Matrix matrixB) {
+        int rowsCnt = matrixA.getRowsCount();
+        int colsCnt = matrixA.getColsCount();
+        Matrix resultMat = new Matrix("result", rowsCnt, colsCnt);
+        
+        for (int i = 0; i < rowsCnt; i++) {
+            for (int j = 0; j < colsCnt; j++) {
+                double sum = matrixA.get()[i][j] - matrixB.get()[i][j];
+                resultMat.get()[i][j] = sum;
+                
+                // Row sum
+                resultMat.get()[i][colsCnt] -= sum;
+                matrixA.get()[i][colsCnt] -= matrixA.get()[i][j];
+                matrixB.get()[i][colsCnt] -= matrixB.get()[i][j];
+                
+                // Column sum
+                resultMat.get()[rowsCnt][j] -= sum;
+                resultMat.get()[rowsCnt][j] -= matrixA.get()[i][j];
+                resultMat.get()[rowsCnt][j] -= matrixA.get()[i][j];
+            }
+        }
+        
+        checkCorrectness(matrixA, matrixB, resultMat);
+        return resultMat;
+    }
+    
     private static void checkCorrectness(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getColsCount();
@@ -52,21 +78,9 @@ public class Calculator {
         }
     }
     
-    public static Matrix subtractMatrices(Matrix matrixA, Matrix matrixB) {
-        int rowsCnt = matrixA.getRowsCount();
-        int colsCnt = matrixA.getRowsCount();
-        Matrix resultMat = new Matrix("result", rowsCnt, colsCnt);
-        
-        for (int i = 0; i < rowsCnt; i++) {
-            for (int j = 0; j < colsCnt; j++) {
-                resultMat.get()[i][j] = matrixA.get()[i][j] - matrixB.get()[i][j];
-            }
-        }
-        return resultMat;
-    }
-    
     
     // ------------------------------- RAW ADD/SUB WITHOUT CHECKSUMS  ---------------------------------
+    
     public static Matrix addNoChecksum(Matrix matrixA, Matrix matrixB) {
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getRowsCount();
@@ -75,6 +89,19 @@ public class Calculator {
         for (int i = 0; i < rowsCnt; i++) {
             for (int j = 0; j < colsCnt; j++) {
                 resultMat.get()[i][j] = matrixA.get()[i][j] + matrixB.get()[i][j];
+            }
+        }
+        return resultMat;
+    }
+    
+    public static Matrix subNoChecksum(Matrix matrixA, Matrix matrixB) {
+        int rowsCnt = matrixA.getRowsCount();
+        int colsCnt = matrixA.getRowsCount();
+        Matrix resultMat = new Matrix("result", rowsCnt, colsCnt);
+        
+        for (int i = 0; i < rowsCnt; i++) {
+            for (int j = 0; j < colsCnt; j++) {
+                resultMat.get()[i][j] = matrixA.get()[i][j] - matrixB.get()[i][j];
             }
         }
         return resultMat;

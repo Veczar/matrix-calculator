@@ -70,25 +70,16 @@ public class HelloController {
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
-
-//    private double[][] extractMatrixValues(GridPane gridPane) {
-//        int rows = gridPane.getRowCount();
-//        int columns = gridPane.getColumnCount();
-//        double[][] matrix = new double[rows][columns];
-//
-//        for (var node : gridPane.getChildren()) {
-//            if (node instanceof TextField) {
-//                Integer row = GridPane.getRowIndex(node);
-//                Integer col = GridPane.getColumnIndex(node);
-//
-//                if (row != null && col != null) {
-//                    TextField textField = (TextField) node;
-//                    String text = textField.getText();
-//                    matrix[row][col] = text.isEmpty() ? 0 : Double.parseDouble(text);
-//                }
-//            }
-//        }
-//
-//        return matrix;
-//    }
+    
+    @FXML
+    private void sub() {
+        matrixA = new Matrix(matrixAGrid, "Matrix A");
+        matrixB = new Matrix(matrixBGrid, "Matrix B");
+        
+        Matrix resultMatrix = Calculator.subMatrices(matrixA, matrixB);
+        System.out.println(resultMatrix);
+        matrixResultGrid = resultMatrix.getAsGridPane(matrixResultGrid);
+        System.out.println(matrixA);
+        System.out.println(matrixB);
+    }
 }

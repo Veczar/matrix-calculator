@@ -58,7 +58,6 @@ public class Matrix {
     }
 
     public GridPane getAsGridPane(GridPane gridPane) {
-//        GridPane gridPane = new GridPane();
         for (int row = 0; row < rowsCount; row++) {
             for (int col = 0; col < colsCount; col++) {
                 TextField textField = new TextField(String.valueOf(data[row][col]));
