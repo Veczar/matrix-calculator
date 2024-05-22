@@ -33,11 +33,11 @@ public class Matrix {
         this.data = new double[rowsCount][colsCount];
     }
 
-    public Matrix(GridPane gridPane, String name) {
+    public Matrix(String name, GridPane gridPane) {
         this.name = name;
-        // +1 to account for checksums at the last position
-        this.rowsCount = gridPane.getRowCount() + 1;
-        this.colsCount = gridPane.getColumnCount() + 1;
+        // checksums at the last position
+        this.rowsCount = gridPane.getRowCount();
+        this.colsCount = gridPane.getColumnCount();
         this.data = new double[rowsCount][colsCount];
         extractMatrixValues(gridPane);
     }
@@ -48,7 +48,7 @@ public class Matrix {
                 Integer row = GridPane.getRowIndex(node);
                 Integer col = GridPane.getColumnIndex(node);
 
-                if (row != null && col != null) {
+                if (row != null && col != null && row < rowsCount-1 && col < colsCount-1) {
                     TextField textField = (TextField) node;
                     String text = textField.getText();
                     data[row][col] = text.isEmpty() ? 0 : Double.parseDouble(text);
@@ -56,16 +56,21 @@ public class Matrix {
             }
         }
     }
-
-    public GridPane getAsGridPane(GridPane gridPane) {
-        for (int row = 0; row < getRowsCount(); row++) {
-            for (int col = 0; col < getColsCount(); col++) {
-                TextField textField = new TextField(String.valueOf(data[row][col]));
-                textField.setPrefWidth(50);
-                gridPane.add(textField, col, row);
+    
+    public void fillGridPane(GridPane gridPane) {
+        for (var node : gridPane.getChildren()) {
+            if (node instanceof TextField) {
+                Integer row = GridPane.getRowIndex(node);
+                Integer col = GridPane.getColumnIndex(node);
+                if (row != null && col != null) {
+                    System.out.print(row + " " + col + " ");
+                    TextField textField = (TextField) node;
+                    textField.setText(String.valueOf(data[row][col]));
+                    System.out.println(data[row][col]);
+                }
             }
         }
-        return gridPane;
+        System.out.println();
     }
 
     @Override
