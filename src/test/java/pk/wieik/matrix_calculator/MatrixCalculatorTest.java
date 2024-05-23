@@ -1,5 +1,6 @@
 package pk.wieik.matrix_calculator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -94,5 +95,19 @@ public class MatrixCalculatorTest {
     
     private void assertMatrixEquals(Matrix expected, Matrix actual) {
         assertArrayEquals(expected.get(), actual.get(), "Matrices are not equal");
+    }
+
+    @Test
+    public void testCheckCorrectnessAddition(){
+        Matrix result = Calculator.addMatrices(matrixA, matrixB);
+        boolean checkCorrectnessAdd = Calculator.checkCorrectnessAddition(matrixA, matrixB, result);
+        assert checkCorrectnessAdd : "Addition checking does not work properly!";
+    }
+
+    @Test
+    public void techCheckCorrectnessSubstraction() {
+        Matrix result = Calculator.subMatrices(matrixA, matrixB);
+        boolean checkCorrectnessSubstraction = Calculator.checkCorrectnessSubtraction(matrixA, matrixB, result);
+        assert checkCorrectnessSubstraction : "Substraction checking does not work properly!";
     }
 }
