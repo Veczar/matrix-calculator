@@ -9,12 +9,10 @@ public class MatrixCalculatorTest {
     
     private Matrix matrixA;
     private Matrix matrixB;
-    private Matrix expectedResult;
     
     @BeforeEach
     public void setUp() {
         // Initialize matrixA and matrixB
-        // For simplicity, we will use 2x2 matrices
         matrixA = new Matrix("A", 2, 2);
         matrixB = new Matrix("B", 2, 2);
         
@@ -35,10 +33,10 @@ public class MatrixCalculatorTest {
     
     @Test
     public void testAddMatrices() {
-        expectedResult = new Matrix("result", 2, 2);
+        Matrix expectedResult = new Matrix("result", 2, 2);
         // 6  8  14
         // 10 12 22
-        // 16 20
+        // 16 20 72
         expectedResult.get()[0][0] = 6;
         expectedResult.get()[0][1] = 8;
         expectedResult.get()[1][0] = 10;
@@ -60,13 +58,12 @@ public class MatrixCalculatorTest {
         System.out.println(matrixB);
         System.out.println(result);
         
-        Calculator.checkCorrectnessAddition(matrixA, matrixB, result);
-        assertMatrixEquals(expectedResult, result);
+        assertArrayEquals(expectedResult.get(), result.get(), "Matrices are not equal");
     }
     
     @Test
     public void testSubMatrices() {
-        expectedResult = new Matrix("result", 2, 2);
+        Matrix expectedResult = new Matrix("result", 2, 2);
         expectedResult.get()[0][0] = -4;
         expectedResult.get()[0][1] = -4;
         expectedResult.get()[1][0] = -4;
@@ -88,11 +85,12 @@ public class MatrixCalculatorTest {
         System.out.println(matrixB);
         System.out.println(result);
         
-        Calculator.checkCorrectnessSubtraction(matrixA, matrixB, result);
-        assertMatrixEquals(expectedResult, result);
+        assertArrayEquals(expectedResult.get(), result.get(), "Matrices are not equal");
     }
     
-    private void assertMatrixEquals(Matrix expected, Matrix actual) {
-        assertArrayEquals(expected.get(), actual.get(), "Matrices are not equal");
+    @Test
+    public void testCheckCorrectAddition() {
+    
     }
+    
 }
