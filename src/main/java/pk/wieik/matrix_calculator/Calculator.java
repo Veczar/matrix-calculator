@@ -77,7 +77,7 @@ public class Calculator {
         return resultMat;
     }
     
-    public static void checkCorrectnessAddition(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
+    public static boolean checkCorrectnessAddition(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getColsCount();
         
@@ -87,7 +87,10 @@ public class Calculator {
             double rowSumB = matrixB.get()[i][colsCnt]; // Last column of matrixB's row
             double expectedRowSum = rowSumA + rowSumB;
             double resultRowSum = resultMat.get()[i][colsCnt];
-            assert expectedRowSum == resultRowSum : "Row sum mismatch at row " + i;
+            if (expectedRowSum != resultRowSum) {
+                System.out.println("Row sum mismatch at row " + i);
+                return false;
+            }
         }
         
         // Iterate through each column to check column sums
@@ -96,18 +99,26 @@ public class Calculator {
             double colSumB = matrixB.get()[rowsCnt][j]; // Last row of matrixB's column
             double expectedColSum = colSumA + colSumB;
             double resultColSum = resultMat.get()[rowsCnt][j];
-            assert expectedColSum == resultColSum : "Column sum mismatch at column " + j;
+            if (expectedColSum != resultColSum) {
+                System.out.println("Column sum mismatch at column " + j);
+                return false;
+            }
         }
         
-        // check grand total
+        // Check grand total
         double resultTotal = resultMat.get()[rowsCnt][colsCnt];
         double expectedTotal = matrixA.get()[rowsCnt][colsCnt] + matrixB.get()[rowsCnt][colsCnt];
-        assert expectedTotal == resultTotal : "Grand total checksum mismatch";
+        if (expectedTotal != resultTotal) {
+            System.out.println("Grand total checksum mismatch");
+            return false;
+        }
         
         System.out.println("All checksums are correct!");
+        return true;
     }
     
-    public static void checkCorrectnessSubtraction(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
+    
+    public static boolean checkCorrectnessSubtraction(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getColsCount();
         
@@ -117,7 +128,10 @@ public class Calculator {
             double rowSumB = matrixB.get()[i][colsCnt]; // Last column of matrixB's row
             double expectedRowSum = rowSumA - rowSumB;
             double resultRowSum = resultMat.get()[i][colsCnt];
-            assert expectedRowSum == resultRowSum : "Row sum mismatch at row " + i;
+            if (expectedRowSum != resultRowSum) {
+                System.out.println("Row sum mismatch at row " + i);
+                return false;
+            }
         }
         
         // Iterate through each column to check column sums
@@ -126,16 +140,24 @@ public class Calculator {
             double colSumB = matrixB.get()[rowsCnt][j]; // Last row of matrixB's column
             double expectedColSum = colSumA - colSumB;
             double resultColSum = resultMat.get()[rowsCnt][j];
-            assert expectedColSum == resultColSum : "Column sum mismatch at column " + j;
+            if (expectedColSum != resultColSum) {
+                System.out.println("Column sum mismatch at column " + j);
+                return false;
+            }
         }
         
-        // check grand total
+        // Check grand total
         double resultTotal = resultMat.get()[rowsCnt][colsCnt];
         double expectedTotal = matrixA.get()[rowsCnt][colsCnt] - matrixB.get()[rowsCnt][colsCnt];
-        assert expectedTotal == resultTotal : "Grand total checksum mismatch";
+        if (expectedTotal != resultTotal) {
+            System.out.println("Grand total checksum mismatch");
+            return false;
+        }
         
         System.out.println("All checksums are correct!");
+        return true;
     }
+    
     
     
     // ------------------------------- RAW ADD/SUB WITHOUT CHECKSUMS  ---------------------------------

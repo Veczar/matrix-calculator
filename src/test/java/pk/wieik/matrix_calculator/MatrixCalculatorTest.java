@@ -53,7 +53,7 @@ public class MatrixCalculatorTest {
         expectedResult.get()[2][1] = 20; // 8 + 12
         
         // Grand total
-        expectedResult.get()[2][2] = 72; // 14 + 22 (row sums)
+        expectedResult.get()[2][2] = 72; // 36 + 36 (row sums)
         
         Matrix result = Calculator.addMatrices(matrixA, matrixB);
         System.out.println(matrixA);
@@ -81,7 +81,7 @@ public class MatrixCalculatorTest {
         expectedResult.get()[2][1] = -8; // -4 + -4
         
         // Grand total
-        expectedResult.get()[2][2] = -32; // -8 + -8 (row sums)
+        expectedResult.get()[2][2] = -32; // -16 + -16 (row sums)
         
         Matrix result = Calculator.subMatrices(matrixA, matrixB);
         System.out.println(matrixA);
