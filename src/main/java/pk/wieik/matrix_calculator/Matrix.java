@@ -3,13 +3,15 @@ package pk.wieik.matrix_calculator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
+import lombok.Setter;
 
 public class Matrix {
     @Getter
     private String name;
     private final int rowsCount;
     private final int colsCount;
-    private final double[][] data;
+    
+    private double[][] data;
 
     public double[][] get() {
         return this.data;
