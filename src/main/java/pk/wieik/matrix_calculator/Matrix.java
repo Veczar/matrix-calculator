@@ -10,7 +10,6 @@ public class Matrix {
     private String name;
     private final int rowsCount;
     private final int colsCount;
-    
     private double[][] data;
 
     public double[][] get() {
@@ -69,11 +68,15 @@ public class Matrix {
                     System.out.print(row + " " + col + " ");
                     TextField textField = (TextField) node;
                     textField.setText(String.valueOf(data[row][col]));
-                    System.out.println(data[row][col]);
+//                    System.out.println(data[row][col]);
                 }
             }
         }
-        System.out.println();
+//        System.out.println();
+    }
+    
+    public void clear() {
+        this.data = new double[rowsCount][colsCount]; // new array with zeros
     }
 
     @Override

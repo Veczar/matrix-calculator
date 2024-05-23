@@ -127,8 +127,8 @@ public class HelloController {
         matrixB = new Matrix("Matrix B", matrixBGrid);
         
         resultMatrix = Calculator.addMatrices(matrixA, matrixB);
-        checkResult();
-        updateView();
+        checkResult(); // check if checksums are correct
+        updateView(); // display results in gui
         
         System.out.println(resultMatrix);
         System.out.println(matrixA);
@@ -225,6 +225,10 @@ public class HelloController {
     @FXML
     private void clearAll() {
         correctnessLabel.setText("");
+        if (matrixA != null) matrixA.clear();
+        if (matrixB != null) matrixB.clear();
+//        if (resultMatrix != null) resultMatrix.clear();
+        
         for (var node : matrixAGrid.getChildren()) {
             if (node instanceof TextField) {
                 ((TextField) node).clear();

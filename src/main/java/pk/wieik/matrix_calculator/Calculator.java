@@ -27,11 +27,13 @@ public class Calculator {
         
         // Calculate the grand total sum for the bottom-right corner
         for (int i = 0; i < rowsCnt; i++) {
+            //rows
             resultMat.get()[rowsCnt][colsCnt] += resultMat.get()[i][colsCnt];
             matrixA.get()[rowsCnt][colsCnt] += matrixA.get()[i][colsCnt];
             matrixB.get()[rowsCnt][colsCnt] += matrixB.get()[i][colsCnt];
         }
         for (int j = 0; j < colsCnt; j++) {
+            //cols
             resultMat.get()[rowsCnt][colsCnt] += resultMat.get()[rowsCnt][j];
             matrixA.get()[rowsCnt][colsCnt] += matrixA.get()[rowsCnt][j];
             matrixB.get()[rowsCnt][colsCnt] += matrixB.get()[rowsCnt][j];
@@ -65,13 +67,13 @@ public class Calculator {
         // Calculate the grand total sum for the bottom-right corner
         for (int i = 0; i < rowsCnt; i++) {
             resultMat.get()[rowsCnt][colsCnt] += resultMat.get()[i][colsCnt];
-              matrixA.get()[rowsCnt][colsCnt] += matrixA.get()[i][colsCnt];
-              matrixB.get()[rowsCnt][colsCnt] += matrixB.get()[i][colsCnt];
+            matrixA.get()[rowsCnt][colsCnt] += matrixA.get()[i][colsCnt];
+            matrixB.get()[rowsCnt][colsCnt] += matrixB.get()[i][colsCnt];
         }
         for (int j = 0; j < colsCnt; j++) {
             resultMat.get()[rowsCnt][colsCnt] += resultMat.get()[rowsCnt][j];
-              matrixA.get()[rowsCnt][colsCnt] += matrixA.get()[rowsCnt][j];
-              matrixB.get()[rowsCnt][colsCnt] += matrixB.get()[rowsCnt][j];
+            matrixA.get()[rowsCnt][colsCnt] += matrixA.get()[rowsCnt][j];
+            matrixB.get()[rowsCnt][colsCnt] += matrixB.get()[rowsCnt][j];
         }
 
         return resultMat;
