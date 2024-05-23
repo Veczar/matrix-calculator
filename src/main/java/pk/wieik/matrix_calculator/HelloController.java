@@ -4,13 +4,16 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Line;
 
 public class HelloController {
+    
+    @FXML
+    private Label correctnessLabel;
 
     @FXML
     private Spinner<Integer> matrixRows, matrixColumns;
@@ -20,6 +23,7 @@ public class HelloController {
 
     private Matrix matrixA;
     private Matrix matrixB;
+    private Matrix resultMatrix;
 
     @FXML
     private void initialize() {
@@ -41,6 +45,31 @@ public class HelloController {
         matrixColumns.valueProperty().addListener(
                 (obs, oldVal, newVal) -> updateMatrixGrid(matrixBGrid, matrixRows.getValue(), newVal)
         );
+    }
+    
+    private void updateMatrixGridLocked(GridPane gridPane, int rows, int columns) {
+        gridPane.getChildren().clear();
+        
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                addTextFieldLocked(0,0, gridPane, col, row);
+            }
+            addTextFieldLocked(0, 10, gridPane, columns, row);
+            addRowLine(gridPane, columns, row);
+        }
+        for (int col = 0; col < columns; col++) {
+            addTextFieldLocked(10, 0, gridPane, col, rows);
+            addColLine(gridPane, rows, col);
+        }
+        addTextFieldLocked(10, 10, gridPane, columns, rows);
+    }
+    
+    private static void addTextFieldLocked(int top, int left, GridPane gridPane, int columns, int row) {
+        TextField textField = new TextField();
+        textField.setPrefWidth(50);
+        textField.setEditable(false);
+        GridPane.setMargin(textField, new Insets(top, 0, 0, left)); // Add margin around each row sum field
+        gridPane.add(textField, columns, row);
     }
     
     // re-renders grid with new size
@@ -91,26 +120,61 @@ public class HelloController {
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
-
+    
     @FXML
     private void add() {
         matrixA = new Matrix("Matrix A", matrixAGrid);
         matrixB = new Matrix("Matrix B", matrixBGrid);
-
-        Matrix resultMatrix = Calculator.addMatrices(matrixA, matrixB);
-        Calculator.checkCorrectnessAddition(matrixA, matrixB, resultMatrix);
         
-        updateView(resultMatrix);
+        resultMatrix = Calculator.addMatrices(matrixA, matrixB);
+        checkResult();
+        updateView();
         
         System.out.println(resultMatrix);
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
-
+    
     @FXML
-    private void clear() {
+    private void sub() {
+        matrixA = new Matrix("Matrix A", matrixAGrid);
+        matrixB = new Matrix("Matrix B", matrixBGrid);
+        
+        resultMatrix = Calculator.subMatrices(matrixA, matrixB);
+        checkResult();
+        updateView();
+        
+        System.out.println(resultMatrix);
+        System.out.println(matrixA);
+        System.out.println(matrixB);
+    }
+    
+    private void checkResult() {
+        if (Calculator.checkCorrectnessAddition(matrixA, matrixB, resultMatrix)) {
+            correctnessLabel.setText("All checksums are correct!");
+            correctnessLabel.setStyle("-fx-text-fill: green;");
+        }
+        else {
+            correctnessLabel.setText("Checksum mismatch!");
+            correctnessLabel.setStyle("-fx-text-fill: red;");
+        }
+    }
+    
+    private void updateView() {
+        // update checksums for input matrices
+        matrixA.fillGridPane(matrixAGrid);
+        matrixB.fillGridPane(matrixBGrid);
+        
+        // show result matrix
+        updateMatrixGridLocked(matrixResultGrid, matrixRows.getValue(), matrixColumns.getValue());
+        resultMatrix.fillGridPane(matrixResultGrid);
+    }
+    
+    @FXML
+    private void clearSums() {
         int rowSize = matrixA.getRowsCount();
         int colSize = matrixA.getColsCount();
+        correctnessLabel.setText("");
 
         for (int i = 0; i < rowSize + 1; i++) {
             matrixA.get()[i][colSize] = 0;
@@ -160,6 +224,7 @@ public class HelloController {
 
     @FXML
     private void clearAll() {
+        correctnessLabel.setText("");
         for (var node : matrixAGrid.getChildren()) {
             if (node instanceof TextField) {
                 ((TextField) node).clear();
@@ -170,28 +235,5 @@ public class HelloController {
                 ((TextField) node).clear();
             }
         }
-    }
-    @FXML
-    private void sub() {
-        matrixA = new Matrix("Matrix A", matrixAGrid);
-        matrixB = new Matrix("Matrix B", matrixBGrid);
-        
-        Matrix resultMatrix = Calculator.subMatrices(matrixA, matrixB);
-        Calculator.checkCorrectnessSubtraction(matrixA, matrixB, resultMatrix);
-        
-        updateView(resultMatrix);
-        
-        System.out.println(resultMatrix);
-        System.out.println(matrixA);
-        System.out.println(matrixB);
-    }
-    
-    private void updateView(Matrix resultMatrix) {
-        // update checksums for input matrices
-        matrixA.fillGridPane(matrixAGrid);
-        matrixB.fillGridPane(matrixBGrid);
-        
-        updateMatrixGrid(matrixResultGrid, matrixRows.getValue(), matrixColumns.getValue()); // render result grid
-        resultMatrix.fillGridPane(matrixResultGrid);
     }
 }
