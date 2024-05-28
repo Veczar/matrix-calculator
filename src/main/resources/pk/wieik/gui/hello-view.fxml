@@ -51,7 +51,7 @@
         </HBox>
     </TitledPane>
     <HBox prefHeight="23.0" prefWidth="700.0">
-        <Button onAction="#extractMatrices" prefHeight="25.0" prefWidth="134.0" text="Log matrices">
+        <Button onAction="#extractMatrices" prefHeight="25.0"  text="Load from file">
             <HBox.margin>
                 <Insets left="10.0" />
             </HBox.margin>

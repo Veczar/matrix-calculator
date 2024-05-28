@@ -3,15 +3,17 @@ package pk.wieik.matrix_calculator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
+import lombok.Setter;
 
 public class Matrix {
 
     @Getter
+    @Setter
     private String name;
     private final int rowsCount;
     private final int colsCount;
     private double[][] data;
-
+    
     public double[][] get() {
         return this.data;
     }
@@ -32,6 +34,14 @@ public class Matrix {
         this.rowsCount = rowsCnt + 1;
         this.colsCount = colsCnt + 1;
         this.data = new double[rowsCount][colsCount];
+    }
+    
+    public Matrix(String s, int rowsCnt, int colsCnt, double[][] data) {
+        this.name = s;
+        // +1 to account for checksums at the last position
+        this.rowsCount = rowsCnt + 1;
+        this.colsCount = colsCnt + 1;
+        this.data = data;
     }
 
     public Matrix(String name, GridPane gridPane) {
@@ -57,7 +67,8 @@ public class Matrix {
                     } catch (NumberFormatException e) {
                         data[row][col] = 0;
 
-                        System.out.println("An invaild value was proivded for row " + row + ", column " + col + ". Value has been reset to 0.");
+                        System.out.println("An invaild value was proivded for row " + row + ", column " + col + ". " +
+                                "Value has been reset to 0.");
                     }
                 }
             }
@@ -70,7 +81,7 @@ public class Matrix {
                 Integer row = GridPane.getRowIndex(node);
                 Integer col = GridPane.getColumnIndex(node);
                 if (row != null && col != null) {
-                    System.out.print(row + " " + col + " ");
+//                    System.out.print(row + " " + col + " ");
                     TextField textField = (TextField) node;
                     textField.setText(String.valueOf(data[row][col]));
 //                    System.out.println(data[row][col]);

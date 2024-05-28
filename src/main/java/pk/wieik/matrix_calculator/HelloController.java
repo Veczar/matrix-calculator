@@ -7,6 +7,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Line;
@@ -118,11 +119,30 @@ public class HelloController {
 
     @FXML
     private void extractMatrices() {
-        matrixA = new Matrix("Matrix A", matrixAGrid);
-        matrixB = new Matrix("Matrix B", matrixBGrid);
-
+        String filePath = getClass().getResource("/matrices.txt").getPath();
+        Matrix[] matrices = FileLoader.loadMatricesFromFile(filePath);
+        
+        matrixA = matrices[0];
+        matrixA.setName("Matrix A");
+        matrixB = matrices[1];
+        matrixB.setName("Matrix B");
+        
+        updateSpinner(matrixRows, matrixA.getRowsCount());
+        updateSpinner(matrixColumns, matrixA.getColsCount());
+        
+        updateMatrixGrid(matrixAGrid, matrixA.getRowsCount(), matrixA.getColsCount());
+        updateMatrixGrid(matrixBGrid, matrixB.getRowsCount(), matrixB.getColsCount());
+        
+        matrixA.fillGridPane(matrixAGrid);
+        matrixB.fillGridPane(matrixBGrid);
+        
         System.out.println(matrixA);
         System.out.println(matrixB);
+    }
+    
+    private static void updateSpinner(Spinner<Integer> spinner, int value) {
+        SpinnerValueFactory<Integer> valueFactory = spinner.getValueFactory();
+        valueFactory.setValue(value);
     }
     
     @FXML
@@ -238,8 +258,7 @@ public class HelloController {
                 }
             }
         }
-
-        System.out.println(matrixA.get()[rowSize][0]);
+        
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
