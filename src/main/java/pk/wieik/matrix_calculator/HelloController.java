@@ -161,7 +161,7 @@ public class HelloController {
     }
     
     private void checkResultSub() {
-        if (Calculator.checkCorrectnessAddition(matrixA, matrixB, resultMatrix)) {
+        if (Calculator.checkCorrectnessSubtraction(matrixA, matrixB, resultMatrix)) {
             correctnessLabel.setText("All checksums are correct!");
             correctnessLabel.setStyle("-fx-text-fill: green;");
         }
