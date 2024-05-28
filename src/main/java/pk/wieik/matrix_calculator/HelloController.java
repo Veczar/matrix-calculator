@@ -1,5 +1,6 @@
 package pk.wieik.matrix_calculator;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -116,10 +117,24 @@ public class HelloController {
         gridPane.add(hLine, columns, row);
         GridPane.setValignment(hLine, VPos.CENTER);
     }
-
+    
     @FXML
-    private void extractMatrices() {
-        String filePath = getClass().getResource("/matrices.txt").getPath();
+    private void extractMatrices1(ActionEvent event) {
+        extractMatrices("/matrices1.txt");
+    }
+    
+    @FXML
+    private void extractMatrices2(ActionEvent event) {
+        extractMatrices("/matrices2.txt");
+    }
+    
+    @FXML
+    private void extractMatrices3(ActionEvent event) {
+        extractMatrices("/matrices3.txt");
+    }
+    
+    private void extractMatrices(String fileName) {
+        String filePath = getClass().getResource(fileName).getPath();
         Matrix[] matrices = FileLoader.loadMatricesFromFile(filePath);
         
         matrixA = matrices[0];
@@ -308,7 +323,7 @@ public class HelloController {
                     if (row == rows || col == cols) {
                         TextField textField = (TextField) node;
                         double randomValue = Math.round(random.nextDouble() * 100.0) ;  // Random value between 0 and 100
-                        textField.setText(String.format("%.2f", randomValue));
+                        textField.setText(String.valueOf(randomValue));
                     }
                 }
             }
@@ -329,7 +344,7 @@ public class HelloController {
                     if (row != rows && col != cols) {
                         TextField textField = (TextField) node;
                         double randomValue = Math.round(random.nextDouble() * 100.0);  // Random value between 0 and 100
-                        textField.setText(String.format("%.2f", randomValue));
+                        textField.setText(String.valueOf(randomValue));
                     }
                 }
             }

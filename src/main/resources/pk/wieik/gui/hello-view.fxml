@@ -51,11 +51,6 @@
         </HBox>
     </TitledPane>
     <HBox prefHeight="23.0" prefWidth="700.0">
-        <Button onAction="#extractMatrices" prefHeight="25.0"  text="Load from file">
-            <HBox.margin>
-                <Insets left="10.0" />
-            </HBox.margin>
-        </Button>
         <Button mnemonicParsing="false" onAction="#add" prefHeight="22.0" prefWidth="82.0" text="Add">
             <HBox.margin>
                 <Insets left="20.0" />
@@ -76,22 +71,34 @@
                 <Insets left="20.0" />
             </HBox.margin>
         </Button>
+        <Button fx:id="fillRnadomButton" onAction="#fillNonBorderMatrices" text="Fill Matrices">
+            <HBox.margin>
+                <Insets left="20.0" />
+            </HBox.margin>
+        </Button>
+        <Button onAction="#fillBorderMatrices" text="Fill Borders">
+            <HBox.margin>
+                <Insets left="10.0" />
+            </HBox.margin>
+        </Button>
     </HBox>
-   <HBox prefHeight="34.0" prefWidth="700.0">
-      <children>
-   
-           <Button fx:id="fillBordersButton" onAction="#fillBorderMatrices" text="Fill Borders">
-           <HBox.margin>
-               <Insets left="10.0" />
-           </HBox.margin>
-           </Button>
-           <Button fx:id="fillRnadomButton" onAction="#fillNonBorderMatrices" text="Fill Matrixes">
-               <HBox.margin>
-                   <Insets left="20.0" />
-               </HBox.margin>
-           </Button>
-      </children>
-   </HBox>
+    <HBox prefHeight="34.0" prefWidth="700.0">
+        <Button onAction="#extractMatrices1" prefHeight="25.0" text="Load from file 1">
+            <HBox.margin>
+                <Insets left="10.0"/>
+            </HBox.margin>
+        </Button>
+        <Button onAction="#extractMatrices2" prefHeight="25.0" text="Load from file 2">
+            <HBox.margin>
+                <Insets left="10.0"/>
+            </HBox.margin>
+        </Button>
+        <Button onAction="#extractMatrices3" prefHeight="25.0" text="Load from file 3">
+            <HBox.margin>
+                <Insets left="10.0"/>
+            </HBox.margin>
+        </Button>
+    </HBox>
     <TitledPane text="Matrix Result">
         <VBox spacing="5.0">
             <GridPane fx:id="matrixResultGrid" hgap="5" vgap="5" />
