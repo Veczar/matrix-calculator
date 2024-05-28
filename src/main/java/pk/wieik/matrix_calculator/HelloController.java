@@ -127,7 +127,7 @@ public class HelloController {
         matrixB = new Matrix("Matrix B", matrixBGrid);
         
         resultMatrix = Calculator.addMatrices(matrixA, matrixB);
-        checkResult(); // check if checksums are correct
+        checkResultAdd(); // check if checksums are correct
         updateView(); // display results in gui
         
         System.out.println(resultMatrix);
@@ -141,7 +141,7 @@ public class HelloController {
         matrixB = new Matrix("Matrix B", matrixBGrid);
         
         resultMatrix = Calculator.subMatrices(matrixA, matrixB);
-        checkResult();
+        checkResultSub();
         updateView();
         
         System.out.println(resultMatrix);
@@ -149,7 +149,18 @@ public class HelloController {
         System.out.println(matrixB);
     }
     
-    private void checkResult() {
+    private void checkResultAdd() {
+        if (Calculator.checkCorrectnessAddition(matrixA, matrixB, resultMatrix)) {
+            correctnessLabel.setText("All checksums are correct!");
+            correctnessLabel.setStyle("-fx-text-fill: green;");
+        }
+        else {
+            correctnessLabel.setText("Checksum mismatch!");
+            correctnessLabel.setStyle("-fx-text-fill: red;");
+        }
+    }
+    
+    private void checkResultSub() {
         if (Calculator.checkCorrectnessAddition(matrixA, matrixB, resultMatrix)) {
             correctnessLabel.setText("All checksums are correct!");
             correctnessLabel.setStyle("-fx-text-fill: green;");
