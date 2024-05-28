@@ -3,9 +3,9 @@ package pk.wieik.matrix_calculator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
-import lombok.Setter;
 
 public class Matrix {
+
     @Getter
     private String name;
     private final int rowsCount;
@@ -50,15 +50,20 @@ public class Matrix {
                 Integer col = GridPane.getColumnIndex(node);
 
                 if (row != null && col != null) {
-//                    if (row < rowsCount-1 && col < colsCount-1) // disables checksums
                     TextField textField = (TextField) node;
                     String text = textField.getText();
-                    data[row][col] = text.isEmpty() ? 0 : Double.parseDouble(text);
+                    try {
+                        data[row][col] = text.isEmpty() ? 0 : Double.parseDouble(text);
+                    } catch (NumberFormatException e) {
+                        data[row][col] = 0;
+
+                        System.out.println("An invaild value was proivded for row " + row + ", column " + col + ". Value has been reset to 0.");
+                    }
                 }
             }
         }
     }
-    
+
     public void fillGridPane(GridPane gridPane) {
         for (var node : gridPane.getChildren()) {
             if (node instanceof TextField) {
