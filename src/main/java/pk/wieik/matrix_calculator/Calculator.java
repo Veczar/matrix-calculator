@@ -78,7 +78,7 @@ public class Calculator {
 
         return resultMat;
     }
-    
+
     public static boolean checkCorrectnessAddition(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getColsCount();
@@ -159,9 +159,7 @@ public class Calculator {
         System.out.println("All checksums are correct!");
         return true;
     }
-    
-    
-    
+
     // ------------------------------- RAW ADD/SUB WITHOUT CHECKSUMS  ---------------------------------
     
     public static Matrix addNoChecksum(Matrix matrixA, Matrix matrixB) {

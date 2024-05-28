@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Line;
 
+import java.util.Random;
+
 public class HelloController {
     
     @FXML
@@ -237,6 +239,60 @@ public class HelloController {
         for (var node : matrixBGrid.getChildren()) {
             if (node instanceof TextField) {
                 ((TextField) node).clear();
+            }
+        }
+    }
+
+    @FXML
+    private void fillBorderMatrices() {
+        fillGridPaneBordersWithRandomValues(matrixAGrid);
+        fillGridPaneBordersWithRandomValues(matrixBGrid);
+    }
+
+    @FXML
+    private void fillNonBorderMatrices() {
+        fillGridPaneNonBordersWithRandomValues(matrixAGrid);
+        fillGridPaneNonBordersWithRandomValues(matrixBGrid);
+    }
+
+    private void fillGridPaneBordersWithRandomValues(GridPane gridPane) {
+        Random random = new Random();
+        int rows = matrixRows.getValue();
+        int cols = matrixColumns.getValue();
+
+        for (var node : gridPane.getChildren()) {
+            if (node instanceof TextField) {
+                Integer row = GridPane.getRowIndex(node);
+                Integer col = GridPane.getColumnIndex(node);
+
+                if (row != null && col != null) {
+                    if (row == rows || col == cols) {
+                        TextField textField = (TextField) node;
+                        double randomValue = Math.round(random.nextDouble() * 100.0) ;  // Random value between 0 and 100
+                        textField.setText(String.format("%.2f", randomValue));
+                    }
+                }
+            }
+        }
+    }
+
+    private void fillGridPaneNonBordersWithRandomValues(GridPane gridPane) {
+        Random random = new Random();
+        int rows = matrixRows.getValue();
+        int cols = matrixColumns.getValue();
+
+        for (var node : gridPane.getChildren()) {
+            if (node instanceof TextField) {
+                Integer row = GridPane.getRowIndex(node);
+                Integer col = GridPane.getColumnIndex(node);
+
+                if (row != null && col != null) {
+                    if (row != rows && col != cols) {
+                        TextField textField = (TextField) node;
+                        double randomValue = Math.round(random.nextDouble() * 100.0);  // Random value between 0 and 100
+                        textField.setText(String.format("%.2f", randomValue));
+                    }
+                }
             }
         }
     }

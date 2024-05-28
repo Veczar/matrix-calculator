@@ -76,6 +76,17 @@
                 <Insets left="20.0"/>
             </HBox.margin>
         </Button>
+
+        <Button fx:id="fillBordersButton" layoutX="110" layoutY="450" text="Fill Borders" onAction="#fillBorderMatrices">
+        <HBox.margin>
+            <Insets left="20.0"/>
+        </HBox.margin>
+        </Button>
+        <Button fx:id="fillRnadomButton" layoutX="210" layoutY="450" text="Fill Matrixes" onAction="#fillNonBorderMatrices">
+            <HBox.margin>
+                <Insets left="20.0"/>
+            </HBox.margin>
+        </Button>
     </HBox>
     <TitledPane text="Matrix Result">
         <VBox spacing="5.0">
