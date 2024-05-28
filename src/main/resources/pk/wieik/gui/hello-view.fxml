@@ -12,86 +12,90 @@
 <VBox prefHeight="600.0" prefWidth="700.0" spacing="10.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pk.wieik.matrix_calculator.HelloController">
     <HBox prefHeight="44.0" prefWidth="700.0" spacing="5.0">
         <VBox.margin>
-            <Insets/>
+            <Insets />
         </VBox.margin>
         <padding>
-            <Insets top="10.0"/>
+            <Insets top="10.0" />
         </padding>
         <Label text="Rows:">
             <HBox.margin>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </HBox.margin>
         </Label>
         <Spinner fx:id="matrixRows" initialValue="4" max="10" min="1">
             <HBox.margin>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </HBox.margin>
         </Spinner>
         <Label text="Columns:">
             <HBox.margin>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </HBox.margin>
         </Label>
         <Spinner fx:id="matrixColumns" initialValue="4" max="10" min="1">
             <HBox.margin>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </HBox.margin>
         </Spinner>
     </HBox>
     <TitledPane text="Matrix Inputs">
         <HBox spacing="10.0">
             <VBox prefHeight="22.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                <Label text="Matrix A"/>
-                <GridPane fx:id="matrixAGrid" hgap="5" vgap="5"/>
+                <Label text="Matrix A" />
+                <GridPane fx:id="matrixAGrid" hgap="5" vgap="5" />
             </VBox>
             <VBox prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                <Label text="Matrix B"/>
-                <GridPane fx:id="matrixBGrid" hgap="5" vgap="5"/>
+                <Label text="Matrix B" />
+                <GridPane fx:id="matrixBGrid" hgap="5" vgap="5" />
             </VBox>
         </HBox>
     </TitledPane>
     <HBox prefHeight="23.0" prefWidth="700.0">
         <Button onAction="#extractMatrices" prefHeight="25.0" prefWidth="134.0" text="Log matrices">
             <HBox.margin>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </HBox.margin>
         </Button>
         <Button mnemonicParsing="false" onAction="#add" prefHeight="22.0" prefWidth="82.0" text="Add">
             <HBox.margin>
-                <Insets left="20.0"/>
+                <Insets left="20.0" />
             </HBox.margin>
         </Button>
         <Button mnemonicParsing="false" onAction="#sub" prefHeight="22.0" prefWidth="82.0" text="Substract">
             <HBox.margin>
-                <Insets left="20.0"/>
+                <Insets left="20.0" />
             </HBox.margin>
         </Button>
         <Button mnemonicParsing="false" onAction="#clearSums" prefHeight="22.0" prefWidth="82.0" text="Clear sums">
             <HBox.margin>
-                <Insets left="20.0"/>
+                <Insets left="20.0" />
             </HBox.margin>
         </Button>
         <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="22.0" prefWidth="82.0" text="Clear all">
             <HBox.margin>
-                <Insets left="20.0"/>
-            </HBox.margin>
-        </Button>
-
-        <Button fx:id="fillBordersButton" layoutX="110" layoutY="450" text="Fill Borders" onAction="#fillBorderMatrices">
-        <HBox.margin>
-            <Insets left="20.0"/>
-        </HBox.margin>
-        </Button>
-        <Button fx:id="fillRnadomButton" layoutX="210" layoutY="450" text="Fill Matrixes" onAction="#fillNonBorderMatrices">
-            <HBox.margin>
-                <Insets left="20.0"/>
+                <Insets left="20.0" />
             </HBox.margin>
         </Button>
     </HBox>
+   <HBox prefHeight="34.0" prefWidth="700.0">
+      <children>
+   
+           <Button fx:id="fillBordersButton" onAction="#fillBorderMatrices" text="Fill Borders">
+           <HBox.margin>
+               <Insets left="10.0" />
+           </HBox.margin>
+           </Button>
+           <Button fx:id="fillRnadomButton" onAction="#fillNonBorderMatrices" text="Fill Matrixes">
+               <HBox.margin>
+                   <Insets left="20.0" />
+               </HBox.margin>
+           </Button>
+      </children>
+   </HBox>
     <TitledPane text="Matrix Result">
         <VBox spacing="5.0">
             <GridPane fx:id="matrixResultGrid" hgap="5" vgap="5" />
-            <Label fx:id="correctnessLabel"/>
+            <Label fx:id="correctnessLabel" />
         </VBox>
     </TitledPane>
 </VBox>
