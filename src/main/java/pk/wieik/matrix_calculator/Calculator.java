@@ -1,5 +1,8 @@
 package pk.wieik.matrix_calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Calculator {
     private Calculator() {}
 
@@ -79,7 +82,8 @@ public class Calculator {
         return resultMat;
     }
 
-    public static boolean checkCorrectnessAddition(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
+    public static List<Position> checkCorrectnessAddition(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
+        List<Position> mismatches = new ArrayList<>();
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getColsCount();
         
@@ -91,7 +95,7 @@ public class Calculator {
             double resultRowSum = resultMat.get()[i][colsCnt];
             if (expectedRowSum != resultRowSum) {
                 System.out.println("Row sum mismatch at row " + i);
-                return false;
+                mismatches.add(new Position(i, colsCnt));
             }
         }
         
@@ -103,7 +107,7 @@ public class Calculator {
             double resultColSum = resultMat.get()[rowsCnt][j];
             if (expectedColSum != resultColSum) {
                 System.out.println("Column sum mismatch at column " + j);
-                return false;
+                mismatches.add(new Position(rowsCnt, j));
             }
         }
         
@@ -112,15 +116,19 @@ public class Calculator {
         double expectedTotal = matrixA.get()[rowsCnt][colsCnt] + matrixB.get()[rowsCnt][colsCnt];
         if (expectedTotal != resultTotal) {
             System.out.println("Grand total checksum mismatch");
-            return false;
+            mismatches.add(new Position(rowsCnt, colsCnt));
         }
-        
-        System.out.println("All checksums are correct!");
-        return true;
+
+        if (mismatches.isEmpty()) {
+            System.out.println("All checksums are correct!");
+        }
+
+        return mismatches;
     }
     
     
-    public static boolean checkCorrectnessSubtraction(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
+    public static List<Position> checkCorrectnessSubtraction(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
+        List<Position> mismatches = new ArrayList<>();
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getColsCount();
         
@@ -132,7 +140,7 @@ public class Calculator {
             double resultRowSum = resultMat.get()[i][colsCnt];
             if (expectedRowSum != resultRowSum) {
                 System.out.println("Row sum mismatch at row " + i);
-                return false;
+                mismatches.add(new Position(i, colsCnt));
             }
         }
         
@@ -144,7 +152,7 @@ public class Calculator {
             double resultColSum = resultMat.get()[rowsCnt][j];
             if (expectedColSum != resultColSum) {
                 System.out.println("Column sum mismatch at column " + j);
-                return false;
+                mismatches.add(new Position(rowsCnt, j));
             }
         }
         
@@ -153,12 +161,17 @@ public class Calculator {
         double expectedTotal = matrixA.get()[rowsCnt][colsCnt] - matrixB.get()[rowsCnt][colsCnt];
         if (expectedTotal != resultTotal) {
             System.out.println("Grand total checksum mismatch");
-            return false;
+            mismatches.add(new Position(rowsCnt, colsCnt));
         }
-        
-        System.out.println("All checksums are correct!");
-        return true;
+
+        if (mismatches.isEmpty()) {
+            System.out.println("All checksums are correct!");
+        }
+
+        return mismatches;
     }
+
+
 
     // ------------------------------- RAW ADD/SUB WITHOUT CHECKSUMS  ---------------------------------
     

@@ -4,12 +4,14 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Line;
 
+import java.util.List;
 import java.util.Random;
 
 public class HelloController {
@@ -127,30 +129,32 @@ public class HelloController {
     private void add() {
         matrixA = new Matrix("Matrix A", matrixAGrid);
         matrixB = new Matrix("Matrix B", matrixBGrid);
-        
+
         resultMatrix = Calculator.addMatrices(matrixA, matrixB);
-        updateResultText(Calculator.checkCorrectnessAddition(matrixA, matrixB, resultMatrix)); // check if checksums are correct
-        updateView(); // display results in gui
-        
+        List<Position> mismatchPositions = Calculator.checkCorrectnessAddition(matrixA, matrixB, resultMatrix);
+        updateResultText(mismatchPositions.isEmpty());
+        updateView(mismatchPositions);
+
         System.out.println(resultMatrix);
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
-    
+
     @FXML
     private void sub() {
         matrixA = new Matrix("Matrix A", matrixAGrid);
         matrixB = new Matrix("Matrix B", matrixBGrid);
-        
+
         resultMatrix = Calculator.subMatrices(matrixA, matrixB);
-        updateResultText(Calculator.checkCorrectnessSubtraction(matrixA, matrixB, resultMatrix));
-        updateView();
-        
+        List<Position> mismatchPositions = Calculator.checkCorrectnessSubtraction(matrixA, matrixB, resultMatrix);
+        updateResultText(mismatchPositions.isEmpty());
+        updateView(mismatchPositions);
+
         System.out.println(resultMatrix);
         System.out.println(matrixA);
         System.out.println(matrixB);
     }
-    
+
     private void updateResultText(boolean isvalid) {
         if (isvalid) {
             correctnessLabel.setText("All checksums are correct!");
@@ -161,15 +165,31 @@ public class HelloController {
             correctnessLabel.setStyle("-fx-text-fill: red;");
         }
     }
-    
-    private void updateView() {
-        // update checksums for input matrices
+
+    private void updateView(List<Position> mismatchPositions) {
+        // Update checksums for input matrices
         matrixA.fillGridPane(matrixAGrid);
         matrixB.fillGridPane(matrixBGrid);
-        
-        // show result matrix
+
+        // Show result matrix
         updateMatrixGridLocked(matrixResultGrid, matrixRows.getValue(), matrixColumns.getValue());
         resultMatrix.fillGridPane(matrixResultGrid);
+
+        // Highlight the mismatch positions if there are any
+        if (!mismatchPositions.isEmpty()) {
+            for (Position pos : mismatchPositions) {
+                for (Node node : matrixResultGrid.getChildren()) {
+                    if (node instanceof TextField) {
+                        Integer row = GridPane.getRowIndex(node);
+                        Integer col = GridPane.getColumnIndex(node);
+
+                        if (row != null && col != null && row == pos.row && col == pos.col) {
+                            node.setStyle("-fx-background-color: red;");
+                        }
+                    }
+                }
+            }
+        }
     }
     
     @FXML
