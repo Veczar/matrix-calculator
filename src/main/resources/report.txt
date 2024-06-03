@@ -1,0 +1,22 @@
+Operation: subtraction
+
+Matrix A:
+23.0 34.0 23.0 240.0 
+43.0 32.0 34.0 327.0 
+366.0 198.0 171.0 2604.0 
+
+Matrix B:
+0.0 0.0 0.0 0.0 
+0.0 0.0 0.0 0.0 
+0.0 0.0 0.0 0.0 
+
+result:
+23.0 34.0 23.0 80.0 
+43.0 32.0 34.0 109.0 
+66.0 66.0 57.0 378.0 
+
+Row sum mismatch at row 0
+Row sum mismatch at row 1
+Column sum mismatch at column 0
+Column sum mismatch at column 1
+Column sum mismatch at column 2

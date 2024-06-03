@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
-    private Calculator() {}
+
+    private static final String reportPath = "src/main/resources/report.txt";
+    private Calculator() {
+    }
 
     public static Matrix addMatrices(Matrix matrixA, Matrix matrixB) {
         int rowsCnt = matrixA.getRowsCount();
@@ -84,6 +87,8 @@ public class Calculator {
 
     public static List<Position> checkCorrectnessAddition(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
         List<Position> mismatches = new ArrayList<>();
+        List<String> allMismatches = new ArrayList<>();
+
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getColsCount();
         
@@ -94,7 +99,9 @@ public class Calculator {
             double expectedRowSum = rowSumA + rowSumB;
             double resultRowSum = resultMat.get()[i][colsCnt];
             if (expectedRowSum != resultRowSum) {
-                System.out.println("Row sum mismatch at row " + i);
+                String mismatch = "Row sum mismatch at row " + i;
+                System.out.println(mismatch);
+                allMismatches.add(mismatch);
                 mismatches.add(new Position(i, colsCnt));
             }
         }
@@ -106,7 +113,9 @@ public class Calculator {
             double expectedColSum = colSumA + colSumB;
             double resultColSum = resultMat.get()[rowsCnt][j];
             if (expectedColSum != resultColSum) {
-                System.out.println("Column sum mismatch at column " + j);
+                String mismatch = "Column sum mismatch at column " + j;
+                System.out.println(mismatch);
+                allMismatches.add(mismatch);
                 mismatches.add(new Position(rowsCnt, j));
             }
         }
@@ -122,13 +131,15 @@ public class Calculator {
         if (mismatches.isEmpty()) {
             System.out.println("All checksums are correct!");
         }
-
+        FileLoader.generateReport(reportPath, matrixA, matrixB, resultMat, "addition", allMismatches);
         return mismatches;
     }
     
     
     public static List<Position> checkCorrectnessSubtraction(Matrix matrixA, Matrix matrixB, Matrix resultMat) {
+        List<String> allMismatches = new ArrayList<>();
         List<Position> mismatches = new ArrayList<>();
+
         int rowsCnt = matrixA.getRowsCount();
         int colsCnt = matrixA.getColsCount();
         
@@ -139,8 +150,10 @@ public class Calculator {
             double expectedRowSum = rowSumA - rowSumB;
             double resultRowSum = resultMat.get()[i][colsCnt];
             if (expectedRowSum != resultRowSum) {
-                System.out.println("Row sum mismatch at row " + i);
+                String mismatch = "Row sum mismatch at row " + i;
+                System.out.println(mismatch);
                 mismatches.add(new Position(i, colsCnt));
+                allMismatches.add(mismatch);
             }
         }
         
@@ -151,7 +164,9 @@ public class Calculator {
             double expectedColSum = colSumA - colSumB;
             double resultColSum = resultMat.get()[rowsCnt][j];
             if (expectedColSum != resultColSum) {
-                System.out.println("Column sum mismatch at column " + j);
+                String mismatch = "Column sum mismatch at column " + j;
+                System.out.println(mismatch);
+                allMismatches.add(mismatch);
                 mismatches.add(new Position(rowsCnt, j));
             }
         }
@@ -167,7 +182,7 @@ public class Calculator {
         if (mismatches.isEmpty()) {
             System.out.println("All checksums are correct!");
         }
-
+        FileLoader.generateReport(reportPath, matrixA, matrixB, resultMat, "subtraction", allMismatches);
         return mismatches;
     }
 

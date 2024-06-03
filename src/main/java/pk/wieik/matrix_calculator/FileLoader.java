@@ -1,8 +1,7 @@
 package pk.wieik.matrix_calculator;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
 
 public class FileLoader {
     
@@ -38,4 +37,29 @@ public class FileLoader {
             throw new RuntimeException(msg, e);
         }
     }
+    public static void generateReport(String filePath, Matrix matrixA, Matrix matrixB, Matrix resultMatrix, String operation, List<String> mismatches) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Operation: " + operation + "\n\n");
+            writer.write(matrixA.toString() + "\n");
+
+            writer.write(matrixB.toString() + "\n");
+
+            writer.write(resultMatrix.toString() + "\n");
+
+
+            if (mismatches.isEmpty()) {
+                writer.write("All checksums are correct\n");
+            } else {
+                for (String mismatch : mismatches) {
+                    writer.write(mismatch + "\n");
+                }
+            }
+
+            System.out.println("Report generated successfully at: " + filePath);
+        } catch (IOException e) {
+            String msg = "error while generating report to file: " + filePath;
+            throw new RuntimeException(msg, e);
+        }
+    }
+
 }
