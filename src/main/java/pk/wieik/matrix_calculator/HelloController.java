@@ -344,7 +344,7 @@ public class HelloController {
                     if (row != rows && col != cols) {
                         TextField textField = (TextField) node;
                         double randomValue = Math.round(random.nextDouble() * 100.0);  // Random value between 0 and 100
-                        textField.setText(String.valueOf(randomValue));
+                        textField.setText(String.format("%.2f", randomValue));
                     }
                 }
             }
